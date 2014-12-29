@@ -3,6 +3,7 @@ newsPlusApp.controller('NewsPlusController', ['$scope', '$sce', 'NewsService', '
 	$scope.newsSource = 'yahoo'; // default
 	$scope.articles = NewsService($scope.newsSource).query();
 	$scope.articleTitle;
+	$scope.articleLink;
 	$scope.articleContent;
 	$scope.articleLocation;
 	$scope.weather;
@@ -22,13 +23,16 @@ newsPlusApp.controller('NewsPlusController', ['$scope', '$sce', 'NewsService', '
 	}
 	
 	$scope.openArticle = function(){
-		var articleText = this.article.description;
+		var article = this.article;
+		var articleText = article.description;
+		$scope.reset();
 		try{
-			articleText = $(this.article.description).text();
+			articleText = $(article.description).text();
 		} catch(ex){}
 
-		$scope.articleTitle = this.article.title;
-		$scope.articleContent = $sce.trustAsHtml(this.article.description);
+		$scope.articleLink = article.link;
+		$scope.articleTitle = article.title;
+		$scope.articleContent = $sce.trustAsHtml(article.description);
 		$scope.articleLocation = articleText.split('(')[0].trim();
 		$scope.weather = WeatherService($scope.articleLocation, function(weather){
 			$scope.weather = weather;
