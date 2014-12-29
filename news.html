@@ -57,7 +57,7 @@
 
 			<div class="newsDetail ui section ten wide column ng-hide" ng-hide="articleTitle == null || articleTitle == ''">
 				<div class="ui piled segment sticky">
-					<h1>{{articleTitle}}</h1>
+					<h1><a href="{{articleLink}}">{{articleTitle}}</a></h1>
 					<div class="ui content section" ng-bind-html="articleContent"></div>
 
 					<br>
